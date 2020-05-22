@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const hospitalAdmissions = await resultHospitalAdmissions.json();
   const resultPatientsIntensiveCare = await fetch('http://localhost:3000/api/patientsIntensiveCare');
   const patientsIntensiveCare = await resultPatientsIntensiveCare.json();
-
+  console.log(deceasedPersons[0].data);
   return {
     props: {
       cases,
@@ -25,12 +25,10 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
 export default function Dashboard(props) {
   const { cases, deceasedPersons, hospitalAdmissions, patientsIntensiveCare } = props;
-  const casesData = useMemo(() => cases, []);
-  const axes = useMemo(
-    () => [
+  const axes = [
     { primary: true, type: 'utc', position: 'bottom' },
     { type: 'linear', position: 'left' }
-  ], []);
+  ];
 
   return (
     <div className="container">
@@ -38,29 +36,20 @@ export default function Dashboard(props) {
         <title>COVID-19 Dashboard</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main>
-        <h3>
-          COVID-19 Dashboard
-        </h3>
-
-        <h5>
-          Gebruikt de laatste data van het <a href="https://www.rivm.nl/coronavirus-covid-19/actueel">RIVM</a>
-        </h5>
-
         <div className="grid">
           <div className="card">
             <h3>Positief geteste personen</h3>
             <div className="data-block">
               <p>{cases[0].data[cases[0].data.length - 1][1]}</p>
-              <span className="data-block__label">(+{cases[0].data[cases[0].data.length - 1][2]})</span>
+              <span className="data-block__label">(+{cases[0].data[cases[0].data.length - 1][1]})</span>
             </div>
             <div
               style={{
                 height: '300px',
               }}>
               <Chart
-                data={casesData}
+                data={cases}
                 axes={axes}
               />
             </div>
@@ -72,21 +61,31 @@ export default function Dashboard(props) {
               <p>{deceasedPersons.count}</p>
               <span className="data-block__label">(+{deceasedPersons.new})</span>
             </div>
-          </div>
-
-          <div className="card">
-            <h3>Overleden personen</h3>
-            <div className="data-block">
-              <p>{hospitalAdmissions.count}</p>
-              <span className="data-block__label">(+{hospitalAdmissions.new})</span>
+            <div
+              style={{
+                height: '300px',
+              }}>
+              <Chart
+                data={cases}
+                axes={axes}
+              />
             </div>
           </div>
-
+          {console.log(deceasedPersons)}
           <div className="card">
             <h3>Overleden personen</h3>
             <div className="data-block">
-              <p>{patientsIntensiveCare.count}</p>
-              <span className="data-block__label">(+{patientsIntensiveCare.new})</span>
+              <p>{deceasedPersons[0].data[deceasedPersons[0].data.length - 1][1]}</p>
+              <span className="data-block__label">(+{deceasedPersons[0].data[deceasedPersons[0].data.length - 1][1]})</span>
+            </div>
+            <div
+              style={{
+                height: '300px',
+              }}>
+              <Chart
+                data={deceasedPersons}
+                axes={axes}
+              />
             </div>
           </div>
         </div>
@@ -145,7 +144,6 @@ export default function Dashboard(props) {
           align-items: center;
           justify-content: center;
           flex-wrap: wrap;
-          margin-top: 3rem;
         }
 
         .card {
