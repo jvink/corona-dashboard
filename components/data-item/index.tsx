@@ -18,7 +18,7 @@ const NewCount = styled.h1`
   color: ${props => props.theme.primaryColor};
 `;
 const Total = styled.label`
-  color: grey;
+  color: ${props => props.theme.hintColor};
 `;
 
 interface DataCardProps {

@@ -4,6 +4,7 @@ import { Chart } from 'react-charts';
 import styled from 'styled-components';
 import Header from '../components/header';
 import DataCard from '../components/data-item';
+import Footer from '../components/footer';
 
 const Container = styled.div`
   background-color: ${props => props.theme.bg};
@@ -11,6 +12,18 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+`;
+const Main = styled.main`
+  padding: 2rem;
+  flex: 1;
+`;
+const DataList = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 export const getServerSideProps: GetServerSideProps = async context => {
@@ -49,12 +62,12 @@ export default function Dashboard(props) {
 
       <Header />
 
-      <main>
-        <div className="data-numbers">
+      <Main>
+        <DataList>
           <DataCard label="Positief geteste personen" newCount={cases[0].data[cases[0].data.length - 1][1]} total={45.064} />
           <DataCard label="Ziekenhuisopnames" newCount={hospitalAdmissions[0].data[hospitalAdmissions[0].data.length - 1][1]} total={11.659} />
           <DataCard label="Overleden personen" newCount={deceasedPersons[0].data[deceasedPersons[0].data.length - 1][1]} total={5.811} />
-        </div>
+        </DataList>
         {/* <div className="grid">
           <div className="card">
             <h3>Positief geteste personen</h3>
@@ -94,62 +107,9 @@ export default function Dashboard(props) {
             </div>
           </div>
         </div> */}
-      </main>
+      </Main>
 
-      <footer>
-        <a
-          href="https://www.linkedin.com/in/jurian-vink-282465141/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Made by Jurian Vink
-        </a>
-      </footer>
-
-      <style jsx>{`
-        main {
-          padding: 2rem;
-          flex: 1;
-        }
-
-        .data-numbers {
-          display: flex;
-        }
-
-        footer {
-          width: 100%;
-          height: 50px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .grid {
-          display: flex;
-        }
-
-        .card {
-          flex-basis: 33.33%;
-          border-radius: 8px;
-          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-          margin: 24px;
-          padding: 24px;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
+      <Footer />
 
       <style jsx global>{`
         html,
