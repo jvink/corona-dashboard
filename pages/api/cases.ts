@@ -89,8 +89,9 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         [Date.UTC(2020, 5, 18), 102],
         [Date.UTC(2020, 5, 19), 175],
         [Date.UTC(2020, 5, 20), 261],
-        [Date.UTC(2020, 5, 21), 8],
-        [Date.UTC(2020, 5, 22), 0],
+        [Date.UTC(2020, 5, 21), 253],
+        [Date.UTC(2020, 5, 22), 188],
+        [Date.UTC(2020, 5, 23), 176],
       ],
     },
   ]);

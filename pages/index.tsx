@@ -1,7 +1,17 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { Chart } from 'react-charts';
-import { useMemo } from 'react';
+import styled from 'styled-components';
+import Header from '../components/header';
+import DataCard from '../components/data-item';
+
+const Container = styled.div`
+  background-color: ${props => props.theme.bg};
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const resultCases = await fetch('http://localhost:3000/api/cases');
@@ -12,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const hospitalAdmissions = await resultHospitalAdmissions.json();
   const resultPatientsIntensiveCare = await fetch('http://localhost:3000/api/patientsIntensiveCare');
   const patientsIntensiveCare = await resultPatientsIntensiveCare.json();
-  console.log(deceasedPersons[0].data);
+
   return {
     props: {
       cases,
@@ -31,19 +41,23 @@ export default function Dashboard(props) {
   ];
 
   return (
-    <div className="container">
+    <Container>
       <Head>
         <title>COVID-19 Dashboard</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Header />
+
       <main>
-        <div className="grid">
+        <div className="data-numbers">
+          <DataCard label="Positief geteste personen" newCount={cases[0].data[cases[0].data.length - 1][1]} total={45.064} />
+          <DataCard label="Ziekenhuisopnames" newCount={hospitalAdmissions[0].data[hospitalAdmissions[0].data.length - 1][1]} total={11.659} />
+          <DataCard label="Overleden personen" newCount={deceasedPersons[0].data[deceasedPersons[0].data.length - 1][1]} total={5.811} />
+        </div>
+        {/* <div className="grid">
           <div className="card">
             <h3>Positief geteste personen</h3>
-            <div className="data-block">
-              <p>{cases[0].data[cases[0].data.length - 1][1]}</p>
-              <span className="data-block__label">(+{cases[0].data[cases[0].data.length - 1][1]})</span>
-            </div>
             <div
               style={{
                 height: '300px',
@@ -57,27 +71,18 @@ export default function Dashboard(props) {
 
           <div className="card">
             <h3>Ziekenhuisopnames</h3>
-            <div className="data-block">
-              <p>{deceasedPersons.count}</p>
-              <span className="data-block__label">(+{deceasedPersons.new})</span>
-            </div>
             <div
               style={{
                 height: '300px',
               }}>
               <Chart
-                data={cases}
+                data={hospitalAdmissions}
                 axes={axes}
               />
             </div>
           </div>
-          {console.log(deceasedPersons)}
           <div className="card">
             <h3>Overleden personen</h3>
-            <div className="data-block">
-              <p>{deceasedPersons[0].data[deceasedPersons[0].data.length - 1][1]}</p>
-              <span className="data-block__label">(+{deceasedPersons[0].data[deceasedPersons[0].data.length - 1][1]})</span>
-            </div>
             <div
               style={{
                 height: '300px',
@@ -88,7 +93,7 @@ export default function Dashboard(props) {
               />
             </div>
           </div>
-        </div>
+        </div> */}
       </main>
 
       <footer>
@@ -102,16 +107,13 @@ export default function Dashboard(props) {
       </footer>
 
       <style jsx>{`
-        .container {
-          min-height: 100vh;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
+        main {
+          padding: 2rem;
+          flex: 1;
         }
 
-        main {
-          padding: 1rem;
-          flex: 1;
+        .data-numbers {
+          display: flex;
         }
 
         footer {
@@ -123,39 +125,16 @@ export default function Dashboard(props) {
           align-items: center;
         }
 
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .data-block {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-        }
-
-        .data-block__label {
-          margin-left: 8px;
-          font-size: 14px;
-        }
-
         .grid {
           display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
         }
 
         .card {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          flex-basis: 50%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
+          flex-basis: 33.33%;
+          border-radius: 8px;
+          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+          margin: 24px;
+          padding: 24px;
         }
 
         .card h3 {
@@ -163,15 +142,6 @@ export default function Dashboard(props) {
           font-size: 1.5rem;
         }
 
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
 
         @media (max-width: 600px) {
           .grid {
@@ -195,6 +165,6 @@ export default function Dashboard(props) {
           box-sizing: border-box;
         }
       `}</style>
-    </div>
+    </Container>
   )
 }
