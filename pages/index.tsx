@@ -28,7 +28,7 @@ const DataList = styled.div`
   }
 `;
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps = async _ => {
   const result = await fetch('http://localhost:3000/api/data');
   const data = await result.json();
   const { cases, deceasedPersons, hospitalAdmissions, patientsIntensiveCare } = data;
@@ -45,10 +45,6 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
 export default function Dashboard(props) {
   const { cases, deceasedPersons, hospitalAdmissions, patientsIntensiveCare } = props;
-  const axes = [
-    { primary: true, type: 'utc', position: 'bottom' },
-    { type: 'linear', position: 'left' }
-  ];
 
   return (
     <Container>
