@@ -1,11 +1,13 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
 import Header from '../components/header';
 import DataItem from '../components/data-item';
 import Footer from '../components/footer';
-import GraphItem from '../components/graph-item';
+
+const GraphItem = dynamic(() => import('../components/graph-item'));
 
 const Container = styled.div`
   background-color: ${props => props.theme.bg};
