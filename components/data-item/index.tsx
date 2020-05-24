@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Card from '../card';
 
 const Wrapper = styled.div`
-  flex-basis: 33.33%;
+  flex-basis: calc(33.33% - 24px);
   
   &:not(:last-child) {
     margin-right: 24px;
@@ -21,13 +21,13 @@ const Total = styled.label`
   color: ${props => props.theme.hintColor};
 `;
 
-interface DataCardProps {
+interface DataItemProps {
   label: string;
   newCount: number;
   total: number;
 }
 
-const DataCard = (props: DataCardProps) => {
+const DataItem = (props: DataItemProps) => {
   const { label, newCount, total} = props;
 
   return (
@@ -43,4 +43,4 @@ const DataCard = (props: DataCardProps) => {
   );
 };
 
-export default DataCard;
+export default DataItem;

@@ -1,10 +1,11 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { Chart } from 'react-charts';
 import styled from 'styled-components';
+
 import Header from '../components/header';
-import DataCard from '../components/data-item';
+import DataItem from '../components/data-item';
 import Footer from '../components/footer';
+import GraphItem from '../components/graph-item';
 
 const Container = styled.div`
   background-color: ${props => props.theme.bg};
@@ -20,6 +21,7 @@ const Main = styled.main`
 const DataList = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 
   @media (max-width: 600px) {
     flex-direction: column;
@@ -64,49 +66,17 @@ export default function Dashboard(props) {
 
       <Main>
         <DataList>
-          <DataCard label="Positief geteste personen" newCount={cases[0].data[cases[0].data.length - 1][1]} total={45.064} />
-          <DataCard label="Ziekenhuisopnames" newCount={hospitalAdmissions[0].data[hospitalAdmissions[0].data.length - 1][1]} total={11.659} />
-          <DataCard label="Overleden personen" newCount={deceasedPersons[0].data[deceasedPersons[0].data.length - 1][1]} total={5.811} />
+          <DataItem label="Positief geteste personen" newCount={cases[cases.length - 1].count} total={45.064} />
+          <DataItem label="Ziekenhuisopnames" newCount={hospitalAdmissions[hospitalAdmissions.length - 1].count} total={11.659} />
+          <DataItem label="Overleden personen" newCount={deceasedPersons[deceasedPersons.length - 1].count} total={5.811} />
         </DataList>
-        {/* <div className="grid">
-          <div className="card">
-            <h3>Positief geteste personen</h3>
-            <div
-              style={{
-                height: '300px',
-              }}>
-              <Chart
-                data={cases}
-                axes={axes}
-              />
-            </div>
-          </div>
 
-          <div className="card">
-            <h3>Ziekenhuisopnames</h3>
-            <div
-              style={{
-                height: '300px',
-              }}>
-              <Chart
-                data={hospitalAdmissions}
-                axes={axes}
-              />
-            </div>
-          </div>
-          <div className="card">
-            <h3>Overleden personen</h3>
-            <div
-              style={{
-                height: '300px',
-              }}>
-              <Chart
-                data={deceasedPersons}
-                axes={axes}
-              />
-            </div>
-          </div>
-        </div> */}
+
+        <DataList>
+          <GraphItem label="Positief geteste personen" data={cases} />
+          <GraphItem label="Ziekenhuisopnames" data={hospitalAdmissions} />
+          <GraphItem label="Overleden personen" data={deceasedPersons} />
+        </DataList>
       </Main>
 
       <Footer />

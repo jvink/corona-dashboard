@@ -8,10 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/recharts": "^1.8.10",
     "next": "9.4.1",
     "react": "16.13.1",
-    "react-charts": "^2.0.0-beta.6",
     "react-dom": "16.13.1",
+    "recharts": "^1.8.5",
     "styled-components": "^5.1.0",
     "use-dark-mode": "^2.3.1"
   },
