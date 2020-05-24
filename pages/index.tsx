@@ -29,14 +29,9 @@ const DataList = styled.div`
 `;
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const resultCases = await fetch('http://localhost:3000/api/cases');
-  const cases = await resultCases.json();
-  const resultDeceasedPersons = await fetch('http://localhost:3000/api/deceasedPersons');
-  const deceasedPersons = await resultDeceasedPersons.json();
-  const resultHospitalAdmissions = await fetch('http://localhost:3000/api/hospitalAdmissions');
-  const hospitalAdmissions = await resultHospitalAdmissions.json();
-  const resultPatientsIntensiveCare = await fetch('http://localhost:3000/api/patientsIntensiveCare');
-  const patientsIntensiveCare = await resultPatientsIntensiveCare.json();
+  const result = await fetch('http://localhost:3000/api/data');
+  const data = await result.json();
+  const { cases, deceasedPersons, hospitalAdmissions, patientsIntensiveCare } = data;
 
   return {
     props: {
