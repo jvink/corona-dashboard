@@ -20,7 +20,7 @@ const Footer = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Made by Jurian Vink
+        Gemaakt door Jurian Vink
       </Link>
     </FooterDiv>
   );
