@@ -22,8 +22,8 @@ const SubTitle = styled.h3`
 `;
 const Icon = styled.svg`
   fill: ${props => props.theme.primaryColor};
-  height: 24px;
-  width: 24px;
+  height: 1.5rem;
+  width: 1.5rem;
 `;
 
 const Header = () => {

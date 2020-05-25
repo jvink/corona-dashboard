@@ -3,22 +3,22 @@ import Card from '../card';
 
 const Wrapper = styled.div`
   width: 100%;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
   margin-right: 0px;
 
   @media (min-width: 1100px) {
-    width: calc(33.33% - (1 - 1 / 3) * 24px);
+    width: calc(33.33% - (1 - 1 / 3) * 1.5rem);
   }
   
   @media (min-width: 1100px) {
     &:not(:last-child) {
       margin-botom: 0px;
-      margin-right: 24px;
+      margin-right: 1.5rem;
     }
   }
 `;
 const Body = styled.div`
-  padding: 24px;
+  padding: 1.5rem;
 `;
 const Label = styled.h3`
   color: ${props => props.theme.fontColor};

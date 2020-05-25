@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 const Body = styled.div`
-  padding: 12px 24px 48px 24px;
+  padding: 0.75rem 1.5rem 3rem 1.5rem;
 `;
 const Label = styled.h3`
   color: ${props => props.theme.fontColor};
@@ -14,26 +14,26 @@ const Label = styled.h3`
 const Bar = styled.div`
   position: relative;
   display: flex;
-  height: 20px;
+  height: 1.25rem;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 `;
 const MinBedCap = styled.div`
-  margin-top: 20px;
+  margin-top: 1.25rem;
   position: absolute;
   color: ${props => props.theme.hintColor};
 `;
 const MaxBedCap = styled.div`
   color: ${props => props.theme.hintColor};
   right: 0;
-  top: 20px;
+  top: 1.25rem;
   position: absolute;
 `;
 const Green = styled.div`
   background-color: green;
   width: 50%;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 `;
 const Orange = styled.div`
   background-color: orange;
@@ -42,8 +42,8 @@ const Orange = styled.div`
 const Red = styled.div`
   background-color: red;
   width: 20%;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 `;
 
 interface MeterProps {
@@ -59,16 +59,16 @@ const Meter = (props: MeterProps) => {
   const Pointer = styled.div`
     position: absolute;
     left: ${getOffset(value)};
-    top: -5px;
+    top: -0.35rem;
     width: 3px;
-    height: 30px;
+    height: 2rem;
     background-color: ${props => props.theme.fontColor};
   `;
   const BedsUsed = styled.div`
     color: ${props => props.theme.hintColor};
     position: absolute;
     left: ${getOffset(value)};
-    top: 20px;
+    top: 1.25rem;
   `;
 
   return (

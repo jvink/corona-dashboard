@@ -18,8 +18,12 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 const Main = styled.main`
-  padding: 2rem;
+  padding: 1rem;
   flex: 1;
+
+  @media (min-width: 600px) {
+    padding: 2rem;
+  }
 `;
 const DataList = styled.div`
   display: flex;
