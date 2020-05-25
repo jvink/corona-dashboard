@@ -21,6 +21,11 @@ const SubTitle = styled.h3`
   margin-top: 4px;
   margin-bottom: 0;
 `;
+const LastUpdated = styled.span`
+  color: ${props => props.theme.hintColor};
+  margin-top: 12px;
+  font-size: 14px;
+`;
 const DarkModeToggle = styled.div`
   display: flex;
   & > button {
@@ -48,6 +53,7 @@ const Header = () => {
       <TextBlock>
         <Title>COVID-19</Title>
         <SubTitle>Nederland</SubTitle>
+        <LastUpdated>Laatst geüpdate: 25 mei 2020</LastUpdated>
       </TextBlock>
       <DarkModeToggle>
         <button type="button" onClick={darkMode.disable}>

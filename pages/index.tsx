@@ -23,6 +23,7 @@ const Main = styled.main`
 
   @media (min-width: 600px) {
     padding: 2rem;
+    padding-top: 1rem;
   }
 `;
 const DataList = styled.div`
