@@ -30,18 +30,22 @@ const MaxBedCap = styled.div`
   position: absolute;
 `;
 const Green = styled.div`
-  background-color: green;
-  width: 50%;
+  background-color: #009432;
+  width: 60%;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
 `;
+const Yellow = styled.div`
+  background-color: #F79F1F;
+  width: 15%;
+`;
 const Orange = styled.div`
-  background-color: orange;
-  width: 30%;
+  background-color: #EE5A24;
+  width: 15%;
 `;
 const Red = styled.div`
-  background-color: red;
-  width: 20%;
+  background-color: #EA2027;
+  width: 10%;
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
 `;
@@ -78,6 +82,7 @@ const Meter = (props: MeterProps) => {
           <Label>IC-capaciteit</Label>
           <Bar>
             <Green />
+            <Yellow />
             <Orange />
             <Red />
             <Pointer />
