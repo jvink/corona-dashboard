@@ -93,14 +93,13 @@ const Header = () => {
         </button>
         <Toggle>
           <ToggleCheckBox
+            id="toggle"
             type="checkbox"
             checked={darkMode.value}
             onChange={darkMode.toggle}
             onClick={darkMode.toggle}
-            id="dmcheck"
-            aria-labelledby="dmchecklabel"
           />
-          <label id="dmchecklabel" htmlFor="dmcheck" onClick={darkMode.toggle} />
+          <label htmlFor="toggle" onClick={darkMode.toggle} />
         </Toggle>
         <button type="button" onClick={darkMode.enable}>
           ☾
