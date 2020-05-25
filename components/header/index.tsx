@@ -98,8 +98,9 @@ const Header = () => {
             onChange={darkMode.toggle}
             onClick={darkMode.toggle}
             id="dmcheck"
+            aria-labelledby="dmchecklabel"
           />
-          <label htmlFor="dmcheck" onClick={darkMode.toggle} />
+          <label id="dmchecklabel" htmlFor="dmcheck" onClick={darkMode.toggle} />
         </Toggle>
         <button type="button" onClick={darkMode.enable}>
           ☾

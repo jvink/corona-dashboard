@@ -272,8 +272,8 @@
     { "date": "24-6-2020", "count": 13 },
     { "date": "25-6-2020", "count": 8 }
   ],
-  "totalCases": 45.445,
-  "totalDeceasedPersons": 5.830,
-  "totalHospitalAdmissions": 11.680,
-  "totalPatientsIntensiveCare": 231
+  "totalCases": "45,445",
+  "totalDeceasedPersons": "5,830",
+  "totalHospitalAdmissions": "11,680",
+  "totalPatientsIntensiveCare": "231"
 }
