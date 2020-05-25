@@ -20,10 +20,62 @@ const SubTitle = styled.h3`
   margin-top: 4px;
   margin-bottom: 0;
 `;
-const Icon = styled.svg`
-  fill: ${props => props.theme.primaryColor};
-  height: 1.5rem;
-  width: 1.5rem;
+const DarkModeToggle = styled.div`
+  display: flex;
+  & > button {
+    font-size: 1.2em;
+    background: none;
+    border: none;
+    color: #F79F1F;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    &:last-child {
+      color: ${props => props.theme.hintColor};
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+const Toggle = styled.span`
+  position: relative;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+`;
+const ToggleCheckBox = styled.input`
+  width: 40px;
+  height: 10px;
+  background: #D9D9D9;
+  position: relative;
+  border-radius: 5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  vertical-align: 2px;
+  outline: none;
+
+  &:checked + label {
+    left: 30px;
+  }
+
+  &:focus-visible {
+    outline: solid 2px white;
+  }
+
+  & + label {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: absolute;
+    left: 2px;
+    background-color: #4E7DD4;
+  }
 `;
 
 const Header = () => {
@@ -35,11 +87,24 @@ const Header = () => {
         <Title>COVID-19</Title>
         <SubTitle>Nederland</SubTitle>
       </TextBlock>
-      <div onClick={darkMode.toggle}>
-        <Icon>
-          {darkMode.value ? <><path d="M9 2c-1.05 0-2.05.16-3 .46 4.06 1.27 7 5.06 7 9.54 0 4.48-2.94 8.27-7 9.54.95.3 1.95.46 3 .46 5.52 0 10-4.48 10-10S14.52 2 9 2z"/><path d="M0 0h24v24H0z" fill="none"/></> : <><path d="M0 0h24v24H0z" fill="none"/><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></> }
-        </Icon>
-      </div>
+      <DarkModeToggle onClick={darkMode.toggle}>
+        <button type="button" onClick={darkMode.disable}>
+          ☀
+        </button>
+        <Toggle>
+          <ToggleCheckBox
+            type="checkbox"
+            checked={darkMode.value}
+            onChange={darkMode.toggle}
+            onClick={darkMode.toggle}
+            id="dmcheck"
+          />
+          <label htmlFor="dmcheck" onClick={darkMode.toggle} />
+        </Toggle>
+        <button type="button" onClick={darkMode.enable}>
+          ☾
+        </button>
+      </DarkModeToggle>
     </HeaderDiv>
   );
 };

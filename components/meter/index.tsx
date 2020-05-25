@@ -49,6 +49,18 @@ const Red = styled.div`
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
 `;
+const Pointer = styled.div`
+  position: absolute;
+  top: -0.35rem;
+  width: 3px;
+  height: 2rem;
+  background-color: ${props => props.theme.fontColor};
+`;
+const BedsUsed = styled.div`
+  color: ${props => props.theme.hintColor};
+  position: absolute;
+  top: 1.25rem;
+`;
 
 interface MeterProps {
   max: number;
@@ -60,21 +72,6 @@ const Meter = (props: MeterProps) => {
   const array = Array.from(Array(Math.round(max / 100)).keys());
   const getOffset = (value: number): string => `${Math.round(value / array.length)}%`;
 
-  const Pointer = styled.div`
-    position: absolute;
-    left: ${getOffset(value)};
-    top: -0.35rem;
-    width: 3px;
-    height: 2rem;
-    background-color: ${props => props.theme.fontColor};
-  `;
-  const BedsUsed = styled.div`
-    color: ${props => props.theme.hintColor};
-    position: absolute;
-    left: ${getOffset(value)};
-    top: 1.25rem;
-  `;
-
   return (
     <Wrapper>
       <Card>
@@ -85,11 +82,11 @@ const Meter = (props: MeterProps) => {
             <Yellow />
             <Orange />
             <Red />
-            <Pointer />
+            <Pointer style={{ left: getOffset(value) }} />
             <MinBedCap>
               <p>0</p>
             </MinBedCap>
-            <BedsUsed>
+            <BedsUsed style={{ left: getOffset(value) }}>
               <p>{value} bedden in gebruik</p>
             </BedsUsed>
             <MaxBedCap>
