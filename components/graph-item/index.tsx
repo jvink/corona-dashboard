@@ -71,7 +71,7 @@ const GraphItem = (props: GraphItemProps) => {
           </HeaderDiv>
           <div style={{ display: 'flex' }}>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={isCumulative ? cumulativeData : data} margin={{ top: 20, right: 20, bottom: 40, left: 20 }}>
+              <LineChart data={isCumulative ? cumulativeData : data} margin={{ bottom: 40, top: 10 }}>
                 <Line type="monotone" dataKey="count" stroke="#4E7DD4" dot={{ fill: lightTheme.hintColor, stroke: darkTheme.fontColor, strokeWidth: 0.5 }} />
                 <XAxis dataKey="date" angle={25} tickMargin={20} tick={{ fill: dataColor, stroke: dataColor, strokeWidth: 0.5 }} />
                 <YAxis dataKey="count" tick={{ fill: dataColor, stroke: dataColor, strokeWidth: 0.5 }} />
