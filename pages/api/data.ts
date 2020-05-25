@@ -91,6 +91,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
       { date: '22-6-2020', count: 188 },
       { date: '23-6-2020', count: 176 },
       { date: '24-6-2020', count: 172 },
+      { date: '25-6-2020', count: 209 },
     ],
     deceasedPersons: [
       { date: '27-3-2020', count: 0 },
@@ -181,6 +182,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
       { date: '22-6-2020', count: 13 },
       { date: '23-6-2020', count: 23 },
       { date: '24-6-2020', count: 11 },
+      { date: '25-6-2020', count: 8 },
     ],
     hospitalAdmissions: [
       { date: '27-3-2020', count: 1 },
@@ -271,6 +273,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
       { date: '22-6-2020', count: 9 },
       { date: '23-6-2020', count: 10 },
       { date: '24-6-2020', count: 13 },
+      { date: '25-6-2020', count: 8 },
     ],
     patientsIntensiveCare: { count: 231 },
   });

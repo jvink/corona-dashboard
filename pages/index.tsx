@@ -64,9 +64,9 @@ export default function Dashboard(props) {
 
       <Main>
         <DataList>
-          <DataItem label="Positief geteste personen" newCount={cases[cases.length - 1].count} total={45.064} />
-          <DataItem label="Ziekenhuisopnames" newCount={hospitalAdmissions[hospitalAdmissions.length - 1].count} total={11.659} />
-          <DataItem label="Overleden personen" newCount={deceasedPersons[deceasedPersons.length - 1].count} total={5.811} />
+          <DataItem label="Positief geteste personen" newCount={cases[cases.length - 1].count} total={45.445} />
+          <DataItem label="Ziekenhuisopnames" newCount={hospitalAdmissions[hospitalAdmissions.length - 1].count} total={11.680} />
+          <DataItem label="Overleden personen" newCount={deceasedPersons[deceasedPersons.length - 1].count} total={5.830} />
         </DataList>
 
 
