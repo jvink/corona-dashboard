@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import Card from '../card';
 
 const Wrapper = styled.div`

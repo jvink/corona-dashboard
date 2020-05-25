@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CartesianGrid, ResponsiveContainer, XAxis, YAxis, Line, LineChart, Tooltip } from 'recharts';
+
 import Card from '../card';
 
 const Wrapper = styled.div`
