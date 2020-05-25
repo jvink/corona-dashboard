@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
@@ -35,23 +35,18 @@ const DataList = styled.div`
   }
 `;
 
-export const getServerSideProps: GetServerSideProps = async _ => {
-  const result = await fetch('http://localhost:3000/api/data');
-  const data = await result.json();
-  const { cases, deceasedPersons, hospitalAdmissions, patientsIntensiveCare } = data;
+export const getStaticProps: GetStaticProps = async _ => {
+  const data = await import('../data.json');
 
   return {
     props: {
-      cases,
-      deceasedPersons,
-      hospitalAdmissions,
-      patientsIntensiveCare,
+      ...data,
     }
   };
 }
 
 export default function Dashboard(props) {
-  const { cases, deceasedPersons, hospitalAdmissions, patientsIntensiveCare } = props;
+  const { cases, deceasedPersons, hospitalAdmissions, totalCases, totalHospitalAdmissions, totalDeceasedPersons, totalPatientsIntensiveCare } = props;
 
   return (
     <Container>
@@ -64,14 +59,14 @@ export default function Dashboard(props) {
 
       <Main>
         <DataList>
-          <DataItem label="Positief geteste personen" newCount={cases[cases.length - 1].count} total={45.445} />
-          <DataItem label="Ziekenhuisopnames" newCount={hospitalAdmissions[hospitalAdmissions.length - 1].count} total={11.680} />
-          <DataItem label="Overleden personen" newCount={deceasedPersons[deceasedPersons.length - 1].count} total={5.830} />
+          <DataItem label="Positief geteste personen" newCount={cases[cases.length - 1].count} total={totalCases} />
+          <DataItem label="Ziekenhuisopnames" newCount={hospitalAdmissions[hospitalAdmissions.length - 1].count} total={totalHospitalAdmissions} />
+          <DataItem label="Overleden personen" newCount={deceasedPersons[deceasedPersons.length - 1].count} total={totalDeceasedPersons} />
         </DataList>
 
 
         <DataList>
-          <Meter value={patientsIntensiveCare.count} max={1150} />
+          <Meter value={totalPatientsIntensiveCare} max={1150} />
           <GraphItem label="Positief geteste personen" data={cases} />
           <GraphItem label="Ziekenhuisopnames" data={hospitalAdmissions} />
           <GraphItem label="Overleden personen" data={deceasedPersons} />
