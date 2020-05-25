@@ -67,9 +67,9 @@ export default function Dashboard(props) {
 
         <DataList>
           <Meter value={totalPatientsIntensiveCare} max={1150} />
-          <GraphItem label="Positief geteste personen" data={cases} />
-          <GraphItem label="Ziekenhuisopnames" data={hospitalAdmissions} />
-          <GraphItem label="Overleden personen" data={deceasedPersons} />
+          <GraphItem data={cases} keyToggle="Tested" label="Positief geteste personen" />
+          <GraphItem data={hospitalAdmissions}  keyToggle="Admissions" label="Ziekenhuisopnames"/>
+          <GraphItem data={deceasedPersons} keyToggle="Deceased" label="Overleden personen" />
         </DataList>
       </Main>
 
