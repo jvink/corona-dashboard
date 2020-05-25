@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Header from '../components/header';
 import DataItem from '../components/data-item';
 import Footer from '../components/footer';
+import Meter from '../components/meter';
 
 const GraphItem = dynamic(() => import('../components/graph-item'));
 
@@ -66,6 +67,7 @@ export default function Dashboard(props) {
 
 
         <DataList>
+          <Meter value={patientsIntensiveCare.count} max={1150} />
           <GraphItem label="Positief geteste personen" data={cases} />
           <GraphItem label="Ziekenhuisopnames" data={hospitalAdmissions} />
           <GraphItem label="Overleden personen" data={deceasedPersons} />

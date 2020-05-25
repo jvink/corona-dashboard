@@ -2,10 +2,19 @@ import styled from 'styled-components';
 import Card from '../card';
 
 const Wrapper = styled.div`
-  flex-basis: calc(33.33% - 24px);
+  width: 100%;
+  margin-bottom: 24px;
+  margin-right: 0px;
+
+  @media (min-width: 1100px) {
+    width: calc(33.33% - (1 - 1 / 3) * 24px);
+  }
   
-  &:not(:last-child) {
-    margin-right: 24px;
+  @media (min-width: 1100px) {
+    &:not(:last-child) {
+      margin-botom: 0px;
+      margin-right: 24px;
+    }
   }
 `;
 const Body = styled.div`

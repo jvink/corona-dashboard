@@ -3,12 +3,8 @@ import { CartesianGrid, ResponsiveContainer, XAxis, YAxis, Line, LineChart, Tool
 import Card from '../card';
 
 const Wrapper = styled.div`
-  flex-basis: calc(50% - 24px);
+  width: 100%;
   margin-top: 24px;
-  
-  &:not(:last-child) {
-    margin-right: 24px;
-  }
 `;
 const Body = styled.div`
   padding: 24px;
