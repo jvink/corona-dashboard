@@ -5,6 +5,7 @@ module.exports = {
   webpack: (config) => {
     config.plugins.push(
       new SWPrecacheWebpackPlugin({
+        cacheId: 'service-worker-nextjs',
         verbose: true,
         staticFileGlobsIgnorePatterns: [/\.next\//],
         runtimeCaching: [
