@@ -11,15 +11,9 @@ const MyApp = ({ Component, pageProps }) => {
 
   useEffect(() => {
     setIsMounted(true);
+
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('/service-worker.js')
-        .then(() => {
-          console.log('service worker registration successful');
-        })
-        .catch(() => {
-          console.warn('service worker registration failed');
-        })
+      navigator.serviceWorker.register('/service-worker.js');
     }
   }, []);
 

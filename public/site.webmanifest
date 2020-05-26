@@ -1,6 +1,7 @@
 {
     "name": "Nederlands COVID-19 Dashboard",
     "short_name": "NL COVID-19",
+    "description": "Nederlands Dashboard voor COVID-19 data.",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -13,7 +14,8 @@
             "type": "image/png"
         }
     ],
+    "start_url": "/",
+    "display": "standalone",
     "theme_color": "#0652DD",
-    "background_color": "#FFFFFF",
-    "display": "standalone"
+    "background_color": "#FFFFFF"
 }
