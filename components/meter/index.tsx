@@ -7,6 +7,10 @@ const Wrapper = styled.div`
 `;
 const Body = styled.div`
   padding: 0.75rem 1.5rem 3rem 1.5rem;
+
+  @media (max-width: 600px) {
+    padding: 0.75rem 1.5rem 6rem 1.5rem;
+  }
 `;
 const Label = styled.h3`
   color: ${props => props.theme.fontColor};
@@ -28,6 +32,10 @@ const MaxBedCap = styled.div`
   right: 0;
   top: 1.25rem;
   position: absolute;
+
+  @media (max-width: 600px) {
+    top: 4rem;
+  }
 `;
 const Green = styled.div`
   background-color: #009432;
