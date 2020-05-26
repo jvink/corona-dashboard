@@ -79,6 +79,7 @@ export default function Dashboard(props) {
       <style jsx global>{`
         html,
         body {
+          overflow: hidden;
           padding: 0;
           margin: 0;
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
