@@ -12,6 +12,7 @@ const GraphItem = dynamic(() => import('../components/graph-item'));
 
 const Container = styled.div`
   background-color: ${props => props.theme.bg};
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

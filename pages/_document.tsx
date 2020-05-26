@@ -14,7 +14,7 @@ class MyDocument extends Document {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff"></meta>
+        <meta name="theme-color" content="#0652DD"></meta>
         <meta name="description" content="COVID-19 Dashboard Nederland" />
         <Head />
         <body>
