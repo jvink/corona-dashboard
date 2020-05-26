@@ -16,6 +16,7 @@ class MyDocument extends Document {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#0652DD"></meta>
         <meta name="description" content="COVID-19 Dashboard Nederland" />
+        <noscript>Uw browser ondersteund geen Javascript</noscript>
         <Head />
         <body>
           <Main />
