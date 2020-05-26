@@ -39,6 +39,9 @@ const ToggleCheckBox = styled.input`
     background-color: #4E7DD4;
   }
 `;
+const Label = styled.label`
+  color: transparent;
+`;
 
 interface ToggleProps {
   id: string;
@@ -58,7 +61,7 @@ const Toggle = (props: ToggleProps) => {
         onChange={toggle}
         type="checkbox"
       />
-      <label htmlFor={id} style={onOff ? { backgroundColor: value ? '#4E7DD4' : 'grey' } : null} />
+      <Label htmlFor={id} style={onOff ? { backgroundColor: value ? '#4E7DD4' : 'grey' } : null}>{id}</Label>
     </ToggleSpan>
   );
 };
