@@ -53,7 +53,7 @@ const Header = () => {
       <TextBlock>
         <Title>COVID-19</Title>
         <SubTitle>Nederland</SubTitle>
-        <LastUpdated>Laatst geüpdate: 26 mei 2020</LastUpdated>
+        <LastUpdated>Laatst geüpdate: 27 mei 2020</LastUpdated>
       </TextBlock>
       <DarkModeToggle>
         <button type="button" onClick={darkMode.disable}>
