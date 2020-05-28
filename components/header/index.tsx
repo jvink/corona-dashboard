@@ -62,11 +62,11 @@ const Header = () => {
         <LastUpdated>Laatst geüpdate: 28 mei 2020</LastUpdated>
       </TextBlock>
       <DarkModeToggle>
-        <button type="button" onClick={darkMode.disable}>
+        <button name="toggleLightMode" type="button" onClick={darkMode.disable}>
           <SunIcon fill={theme.fontColor} />
         </button>
         <Toggle id="darkModeToggle" toggle={darkMode.toggle} value={darkMode.value} />
-        <button type="button" onClick={darkMode.enable}>
+        <button name="toggleDarkMode" type="button" onClick={darkMode.enable}>
           <MoonIcon fill={theme.fontColor} />
         </button>
       </DarkModeToggle>
