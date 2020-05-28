@@ -42,21 +42,16 @@ interface GraphItemProps {
   data: any;
   keyToggle: string;
   label: string;
+  xKey: string;
+  yKey: string;
 }
 
 const GraphItem = (props: GraphItemProps) => {
-  const { data, keyToggle, label } = props;
+  const { data, keyToggle, label, xKey, yKey } = props;
   const { value } = useDarkMode(false);
   const [isCumulative, setCumulative] = useState(false);
   const toggle = () => setCumulative(!isCumulative);
   const dataColor = value ? darkTheme.fontColor : lightTheme.fontColor;
-  const cumulativeSum = (sum => value => sum += value)(0);
-  const cumulativeData = data.map(raw => {
-    return {
-      date: raw.date,
-      count: cumulativeSum(raw.count),
-    };
-  });
 
   return (
     <Wrapper>
@@ -71,10 +66,10 @@ const GraphItem = (props: GraphItemProps) => {
           </HeaderDiv>
           <div style={{ display: 'flex' }}>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={isCumulative ? cumulativeData : data} margin={{ bottom: 40, top: 10 }}>
-                <Line type="monotone" dataKey="count" stroke="#4E7DD4" dot={{ fill: lightTheme.hintColor, stroke: darkTheme.fontColor, strokeWidth: 0.5 }} />
-                <XAxis dataKey="date" angle={25} tickMargin={20} tick={{ fill: dataColor, stroke: dataColor, strokeWidth: 0.5 }} />
-                <YAxis dataKey="count" tick={{ fill: dataColor, stroke: dataColor, strokeWidth: 0.5 }} />
+              <LineChart data={data} margin={{ bottom: 40, top: 10 }}>
+                <Line type="monotone" dataKey={`${yKey}${isCumulative ? 'Cumulatief' : ''}`} stroke="#4E7DD4" dot={{ fill: lightTheme.hintColor, stroke: darkTheme.fontColor, strokeWidth: 0.5 }} />
+                <XAxis dataKey={xKey} angle={25} tickMargin={20} tick={{ fill: dataColor, stroke: dataColor, strokeWidth: 0.5 }} />
+                <YAxis dataKey={`${yKey}${isCumulative ? 'Cumulatief' : ''}`} tick={{ fill: dataColor, stroke: dataColor, strokeWidth: 0.5 }} />
                 <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                 <Tooltip />
               </LineChart>

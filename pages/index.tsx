@@ -2,11 +2,13 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
+import scrapeIt from 'scrape-it';
 
 import Header from '../components/header';
 import DataItem from '../components/data-item';
 import Footer from '../components/footer';
 import Meter from '../components/meter';
+import { useState } from 'react';
 
 const GraphItem = dynamic(() => import('../components/graph-item'));
 
@@ -39,16 +41,25 @@ const DataList = styled.div`
 
 export const getStaticProps: GetStaticProps = async _ => {
   const data = await import('../data.json');
+  const resultNational = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-national/RIVM_NL_national.json');
+  const resultProvincial = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-provincial/RIVM_NL_provincial_latest.json');
+  const national = await resultNational.json();
+  const provincial = await resultProvincial.json();
 
   return {
     props: {
       ...data,
+      national,
+      provincial,
     }
   };
 }
 
 export default function Dashboard(props) {
-  const { cases, deceasedPersons, hospitalAdmissions, totalCases, totalHospitalAdmissions, totalDeceasedPersons, totalPatientsIntensiveCare } = props;
+  const [selectedProvince, setSelectedProvince] = useState('');
+  const { totalPatientsIntensiveCare, national, provincial } = props;
+  const selectedProviceObject = provincial.data.find(province => province.Provincienaam === selectedProvince);
+  const latestData = selectedProvince !== '' ? selectedProviceObject : national.data[national.data.length - 1];
 
   return (
     <Container>
@@ -57,21 +68,21 @@ export default function Dashboard(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header lastUpdated={latestData.Datum} selectedProvince={selectedProvince} setSelectedProvince={setSelectedProvince} />
 
       <Main>
         <DataList>
-          <DataItem label="Positief geteste personen" newCount={cases[cases.length - 1].count} total={totalCases} />
-          <DataItem label="Ziekenhuisopnames" newCount={hospitalAdmissions[hospitalAdmissions.length - 1].count} total={totalHospitalAdmissions} />
-          <DataItem label="Overleden personen" newCount={deceasedPersons[deceasedPersons.length - 1].count} total={totalDeceasedPersons} />
+          <DataItem label="Positief geteste personen" newCount={latestData.totaalAantal} total={latestData.overledenAantalCumulatief} />
+          <DataItem label="Ziekenhuisopnames" newCount={latestData.ziekenhuisopnameAantal} total={latestData.totaalAantalCumulatief} />
+          <DataItem label="Overleden personen" newCount={latestData.overledenAantal} total={latestData.ziekenhuisopnameAantalCumulatief} />
         </DataList>
 
 
         <DataList>
           <Meter value={totalPatientsIntensiveCare} max={1150} />
-          <GraphItem data={cases} keyToggle="Tested" label="Positief geteste personen" />
-          <GraphItem data={hospitalAdmissions}  keyToggle="Admissions" label="Ziekenhuisopnames"/>
-          <GraphItem data={deceasedPersons} keyToggle="Deceased" label="Overleden personen" />
+          <GraphItem data={national.data} keyToggle="Tested" label="Positief geteste personen" xKey="Datum" yKey="totaalAantal" />
+          <GraphItem data={national.data} keyToggle="Admissions" label="Ziekenhuisopnames" xKey="Datum" yKey="ziekenhuisopnameAantal" />
+          <GraphItem data={national.data} keyToggle="Deceased" label="Overleden personen" xKey="Datum" yKey="overledenAantal" />
         </DataList>
       </Main>
 
