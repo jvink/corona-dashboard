@@ -36,6 +36,7 @@ const ToggleCheckBox = styled.input`
     cursor: pointer;
     position: absolute;
     left: 2px;
+    user-select: none;
     background-color: #4E7DD4;
   }
 `;

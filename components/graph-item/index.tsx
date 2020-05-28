@@ -65,7 +65,7 @@ const GraphItem = (props: GraphItemProps) => {
           <HeaderDiv>
             <Label>{label}</Label>
             <SwitchDiv>
-              <SwitchText>Cummulatief</SwitchText>
+              <SwitchText>Cumulatief</SwitchText>
               <Toggle id={`cumulativeToggle${keyToggle}`} onOff toggle={toggle} value={isCumulative} />
             </SwitchDiv>
           </HeaderDiv>

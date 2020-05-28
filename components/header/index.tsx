@@ -1,10 +1,15 @@
+import { useContext } from 'react';
 import useDarkMode from 'use-dark-mode';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+
 import Toggle from '../toggle';
+import SunIcon from '../icons/SunIcon';
+import MoonIcon from '../icons/MoonIcon';
+import { ThemeProps } from '../../theme';
 
 const HeaderDiv = styled.div`
-  display: flex;
-  padding: 1.5rem 2rem;
+display: flex;
+padding: 1.5rem 2rem;
   justify-content: space-between;
   align-items: center;
 `;
@@ -47,7 +52,8 @@ const DarkModeToggle = styled.div`
 
 const Header = () => {
   const darkMode = useDarkMode(false);
-
+  const theme: ThemeProps = useContext(ThemeContext);
+  
   return (
     <HeaderDiv>
       <TextBlock>
@@ -57,11 +63,11 @@ const Header = () => {
       </TextBlock>
       <DarkModeToggle>
         <button type="button" onClick={darkMode.disable}>
-          ☀
+          <SunIcon fill={theme.fontColor} />
         </button>
         <Toggle id="darkModeToggle" toggle={darkMode.toggle} value={darkMode.value} />
         <button type="button" onClick={darkMode.enable}>
-          ☾
+          <MoonIcon fill={theme.fontColor} />
         </button>
       </DarkModeToggle>
     </HeaderDiv>
