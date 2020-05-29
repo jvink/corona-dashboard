@@ -12,6 +12,10 @@ const Body = styled.div`
     padding: 0.75rem 1.5rem 6rem 1.5rem;
   }
 `;
+const LastUpdated = styled.span`
+  color: ${props => props.theme.hintColor};
+  font-size: 14px;
+`;
 const Label = styled.h3`
   color: ${props => props.theme.fontColor};
 `;
@@ -71,12 +75,13 @@ const BedsUsed = styled.div`
 `;
 
 interface MeterProps {
+  lastUpdated: string;
   max: number;
   value: number;
 }
 
 const Meter = (props: MeterProps) => {
-  const { max, value } = props;
+  const { lastUpdated, max, value } = props;
   const array = Array.from(Array(Math.round(max / 100)).keys());
   const getOffset = (value: number): string => `${Math.round(value / array.length)}%`;
 
@@ -84,6 +89,7 @@ const Meter = (props: MeterProps) => {
     <Wrapper>
       <Card>
         <Body>
+          <LastUpdated>Laatst geüpdate: {lastUpdated}</LastUpdated>
           <Label>IC-capaciteit</Label>
           <Bar>
             <Green />

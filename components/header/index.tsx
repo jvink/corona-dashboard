@@ -67,10 +67,10 @@ interface HeaderProps {
 const Header = (props: HeaderProps) => {
   const { lastUpdated, selectedProvince, setSelectedProvince } = props;
   const darkMode = useDarkMode(false);
-  const theme: ThemeProps = useContext(ThemeContext);
+  const { fontColor }: ThemeProps = useContext(ThemeContext);
 
   const options = [
-    { value: '', label: 'Nederland' },
+    { value: 'Landelijk', label: 'Landelijk' },
     { value: 'Drenthe', label: 'Drenthe' },
     { value: 'Flevoland', label: 'Flevoland' },
     { value: 'Friesland', label: 'Friesland' },
@@ -94,19 +94,36 @@ const Header = (props: HeaderProps) => {
       <TextBlock>
         <Title>COVID-19</Title>
         <Select
-          value={selectedProvince}
+          value={{ value: selectedProvince, label: selectedProvince }}
           onChange={handleChange}
           options={options}
+          styles={{
+            container: (provided) => ({
+              ...provided,
+              marginTop: '1rem',
+              marginBottom: '.5rem',
+            }),
+            control: (provided) => ({
+              ...provided,
+              backgroundColor: 'transparent',
+            }),
+            singleValue: (provided) => ({
+              ...provided,
+              color: '#4E7DD4',
+              fontSize: '1.17em',
+              fontWeight: 'bolder',
+            })
+          }}
         />
         <LastUpdated>Laatst geüpdate: {lastUpdated}</LastUpdated>
       </TextBlock>
       <DarkModeToggle>
         <button name="toggleLightMode" type="button" onClick={darkMode.disable}>
-          <SunIcon fill={theme.fontColor} />
+          <SunIcon fill={fontColor} />
         </button>
         <Toggle id="darkModeToggle" toggle={darkMode.toggle} value={darkMode.value} />
         <button name="toggleDarkMode" type="button" onClick={darkMode.enable}>
-          <MoonIcon fill={theme.fontColor} />
+          <MoonIcon fill={fontColor} />
         </button>
       </DarkModeToggle>
     </HeaderDiv>

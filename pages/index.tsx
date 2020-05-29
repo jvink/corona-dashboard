@@ -40,27 +40,33 @@ const DataList = styled.div`
 `;
 
 export const getStaticProps: GetStaticProps = async _ => {
-  const data = await import('../data.json');
+  const resultIC = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-ic/data-nice/NICE_IC_wide_latest.csv');
   const resultNational = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-national/RIVM_NL_national.json');
   const resultProvincial = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-provincial/RIVM_NL_provincial_latest.json');
   const national = await resultNational.json();
   const provincial = await resultProvincial.json();
+  const dataIC = await resultIC.text();
 
   return {
     props: {
-      ...data,
       national,
       provincial,
-    }
+      dataIC,
+    },
+    unstable_revalidate: 3600 * 2 // 3600 seconds = 1 hour * 2 = 2 hours
   };
 }
 
 export default function Dashboard(props) {
-  const [selectedProvince, setSelectedProvince] = useState('');
-  const { totalPatientsIntensiveCare, national, provincial } = props;
+  const [selectedProvince, setSelectedProvince] = useState('Landelijk');
+  const { national, provincial, dataIC } = props;
   const selectedProviceObject = provincial.data.find(province => province.Provincienaam === selectedProvince);
-  const latestData = selectedProvince !== '' ? selectedProviceObject : national.data[national.data.length - 1];
-
+  const latestData = selectedProvince !== 'Landelijk' ? selectedProviceObject : national.data[national.data.length - 1];
+  const lines = dataIC.trim().split('\n');
+  const lastLine = lines[lines.length - 1].split(',');
+  const latestICDate = lastLine[0];
+  const latestICCapacity = lastLine[1];
+  
   return (
     <Container>
       <Head>
@@ -79,7 +85,7 @@ export default function Dashboard(props) {
 
 
         <DataList>
-          <Meter value={totalPatientsIntensiveCare} max={1150} />
+          <Meter value={latestICCapacity} max={1150} lastUpdated={latestICDate} />
           <GraphItem data={national.data} keyToggle="Tested" label="Positief geteste personen" xKey="Datum" yKey="totaalAantal" />
           <GraphItem data={national.data} keyToggle="Admissions" label="Ziekenhuisopnames" xKey="Datum" yKey="ziekenhuisopnameAantal" />
           <GraphItem data={national.data} keyToggle="Deceased" label="Overleden personen" xKey="Datum" yKey="overledenAantal" />
