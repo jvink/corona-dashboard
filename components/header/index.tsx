@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import useDarkMode from 'use-dark-mode';
 import styled, { ThemeContext } from 'styled-components';
+import Select from 'react-select';
 
 import Toggle from '../toggle';
 import SunIcon from '../icons/SunIcon';
@@ -27,9 +28,11 @@ const ProvinceSelect = styled.select`
   border: none;
   padding: 12px 0px;
   outline: none;
-  font-size: 1rem;
+  font-size: 1.17em;
+  font-weight: bolder;
   margin-top: 4px;
   margin-bottom: 0;
+  margin-left: -4px;
 `;
 const LastUpdated = styled.span`
   color: ${props => props.theme.hintColor};
@@ -65,26 +68,36 @@ const Header = (props: HeaderProps) => {
   const { lastUpdated, selectedProvince, setSelectedProvince } = props;
   const darkMode = useDarkMode(false);
   const theme: ThemeProps = useContext(ThemeContext);
-  
+
+  const options = [
+    { value: '', label: 'Nederland' },
+    { value: 'Drenthe', label: 'Drenthe' },
+    { value: 'Flevoland', label: 'Flevoland' },
+    { value: 'Friesland', label: 'Friesland' },
+    { value: 'Gelderland', label: 'Gelderland' },
+    { value: 'Groningen', label: 'Groningen' },
+    { value: 'Limburg', label: 'Limburg' },
+    { value: 'Noord-Brabant', label: 'Noord-Brabant' },
+    { value: 'Noord-Holland', label: 'Noord-Holland' },
+    { value: 'Overijssel', label: 'Overijssel' },
+    { value: 'Utrecht', label: 'Utrecht' },
+    { value: 'Zeeland', label: 'Zeeland' },
+    { value: 'Zuid-Holland', label: 'Zuid-Holland' },
+  ];
+
+  function handleChange({ value }) {
+    setSelectedProvince(value);
+  }
+
   return (
     <HeaderDiv>
       <TextBlock>
         <Title>COVID-19</Title>
-        <ProvinceSelect value={selectedProvince} onChange={(event) => setSelectedProvince(event.target.value)}>
-          <option id="Nederland" value="">Nederland</option>
-          <option id="Drenthe" value="Drenthe">Drenthe</option>
-          <option id="Flevoland" value="Flevoland">Flevoland</option>
-          <option id="Friesland" value="Friesland">Friesland</option>
-          <option id="Gelderland" value="Gelderland">Gelderland</option>
-          <option id="Groningen" value="Groningen">Groningen</option>
-          <option id="Limburg" value="Limburg">Limburg</option>
-          <option id="Noord-Brabant" value="Noord-Brabant">Noord-Brabant</option>
-          <option id="Noord-Holland" value="Noord-Holland">Noord-Holland</option>
-          <option id="Overijssel" value="Overijssel">Overijssel</option>
-          <option id="Utrecht" value="Utrecht">Utrecht</option>
-          <option id="Zeeland" value="Zeeland">Zeeland</option>
-          <option id="Zuid-Holland" value="Zuid-Holland">Zuid-Holland</option>
-        </ProvinceSelect>
+        <Select
+          value={selectedProvince}
+          onChange={handleChange}
+          options={options}
+        />
         <LastUpdated>Laatst geüpdate: {lastUpdated}</LastUpdated>
       </TextBlock>
       <DarkModeToggle>
