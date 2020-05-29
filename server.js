@@ -14,7 +14,7 @@ app.prepare()
       const parsedUrl = parse(req.url, true)
       const { pathname } = parsedUrl
 
-      if (pathname === '/service-worker.js') {
+      if (pathname === '/sw.js') {
         const filePath = join(__dirname, '.next', pathname)
         app.serveStatic(req, res, filePath)
       } else {
