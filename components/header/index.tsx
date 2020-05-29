@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import useDarkMode from 'use-dark-mode';
 import styled, { ThemeContext } from 'styled-components';
+import Select from 'react-select';
 
 import Toggle from '../toggle';
 import SunIcon from '../icons/SunIcon';
@@ -21,10 +22,17 @@ const Title = styled.h1`
   color: ${props => props.theme.fontColor};
   margin: 0;
 `;
-const SubTitle = styled.h3`
+const ProvinceSelect = styled.select`
   color: ${props => props.theme.primaryColor};
+  background-color: transparent;
+  border: none;
+  padding: 12px 0px;
+  outline: none;
+  font-size: 1.17em;
+  font-weight: bolder;
   margin-top: 4px;
   margin-bottom: 0;
+  margin-left: -4px;
 `;
 const LastUpdated = styled.span`
   color: ${props => props.theme.hintColor};
@@ -50,24 +58,72 @@ const DarkModeToggle = styled.div`
   }
 `;
 
-const Header = () => {
+interface HeaderProps {
+  lastUpdated: string;
+  selectedProvince: string;
+  setSelectedProvince: (province: string) => void;
+}
+
+const Header = (props: HeaderProps) => {
+  const { lastUpdated, selectedProvince, setSelectedProvince } = props;
   const darkMode = useDarkMode(false);
-  const theme: ThemeProps = useContext(ThemeContext);
-  
+  const { fontColor }: ThemeProps = useContext(ThemeContext);
+
+  const options = [
+    { value: 'Landelijk', label: 'Landelijk' },
+    { value: 'Drenthe', label: 'Drenthe' },
+    { value: 'Flevoland', label: 'Flevoland' },
+    { value: 'Friesland', label: 'Friesland' },
+    { value: 'Gelderland', label: 'Gelderland' },
+    { value: 'Groningen', label: 'Groningen' },
+    { value: 'Limburg', label: 'Limburg' },
+    { value: 'Noord-Brabant', label: 'Noord-Brabant' },
+    { value: 'Noord-Holland', label: 'Noord-Holland' },
+    { value: 'Overijssel', label: 'Overijssel' },
+    { value: 'Utrecht', label: 'Utrecht' },
+    { value: 'Zeeland', label: 'Zeeland' },
+    { value: 'Zuid-Holland', label: 'Zuid-Holland' },
+  ];
+
+  function handleChange({ value }) {
+    setSelectedProvince(value);
+  }
+
   return (
     <HeaderDiv>
       <TextBlock>
         <Title>COVID-19</Title>
-        <SubTitle>Nederland</SubTitle>
-        <LastUpdated>Laatst geüpdate: 29 mei 2020</LastUpdated>
+        <Select
+          value={{ value: selectedProvince, label: selectedProvince }}
+          onChange={handleChange}
+          options={options}
+          styles={{
+            container: (provided) => ({
+              ...provided,
+              marginTop: '1rem',
+              marginBottom: '.5rem',
+            }),
+            control: (provided) => ({
+              ...provided,
+              backgroundColor: 'transparent',
+            }),
+            singleValue: (provided) => ({
+              ...provided,
+              color: '#4E7DD4',
+              fontSize: '1.17em',
+              fontWeight: 'bolder',
+            })
+          }}
+        />
+        <LastUpdated>Laatst geüpdate: {lastUpdated}</LastUpdated>
       </TextBlock>
       <DarkModeToggle>
         <button name="toggleLightMode" type="button" onClick={darkMode.disable}>
-          <SunIcon fill={theme.fontColor} />
+          <SunIcon fill={fontColor} />
         </button>
         <Toggle id="darkModeToggle" toggle={darkMode.toggle} value={darkMode.value} />
         <button name="toggleDarkMode" type="button" onClick={darkMode.enable}>
-          <MoonIcon fill={theme.fontColor} />
+          <MoonIcon fill={fontColor} />
         </button>
       </DarkModeToggle>
     </HeaderDiv>
