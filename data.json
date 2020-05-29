@@ -91,7 +91,8 @@
     { "date": "25-5-2020", "count": 209 },
     { "date": "26-5-2020", "count": 133 },
     { "date": "27-5-2020", "count": 190 },
-    { "date": "28-5-2020", "count": 182 }
+    { "date": "28-5-2020", "count": 182 },
+    { "date": "29-5-2020", "count": 176 }
   ],
   "deceasedPersons": [
     { "date": "27-2-2020", "count": 0 },
@@ -185,7 +186,8 @@
     { "date": "25-5-2020", "count": 8 },
     { "date": "26-5-2020", "count": 26 },
     { "date": "27-5-2020", "count": 15 },
-    { "date": "28-5-2020", "count": 32 }
+    { "date": "28-5-2020", "count": 32 },
+    { "date": "29-5-2020", "count": 28 }
   ],
   "hospitalAdmissions": [
     { "date": "27-2-2020", "count": 1 },
@@ -279,10 +281,11 @@
     { "date": "25-5-2020", "count": 8 },
     { "date": "26-5-2020", "count": 10 },
     { "date": "27-5-2020", "count": 7 },
-    { "date": "28-5-2020", "count": 16 }
+    { "date": "28-5-2020", "count": 16 },
+    { "date": "29-5-2020", "count": 9 }
   ],
-  "totalCases": "45,950",
-  "totalDeceasedPersons": "5,903",
-  "totalHospitalAdmissions": "11,713",
+  "totalCases": "46,126",
+  "totalDeceasedPersons": "5,931",
+  "totalHospitalAdmissions": "11,722",
   "totalPatientsIntensiveCare": "186"
 }
