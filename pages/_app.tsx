@@ -9,9 +9,9 @@ const MyApp = ({ Component, pageProps }) => {
   const theme: ThemeProps = darkMode.value ? darkTheme : lightTheme;
 
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
-    }
+    // if ('serviceWorker' in navigator) {
+    //   navigator.serviceWorker.register('/sw.js');
+    // }
   }, []);
 
   return (
