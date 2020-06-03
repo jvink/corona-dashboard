@@ -1,8 +1,7 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
-import scrapeIt from 'scrape-it';
 
 import Header from '../components/header';
 import DataItem from '../components/data-item';
@@ -39,7 +38,7 @@ const DataList = styled.div`
   }
 `;
 
-export const getStaticProps: GetStaticProps = async _ => {
+export const getServerSideProps: GetServerSideProps = async _ => {
   const resultIC = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-ic/data-nice/NICE_IC_wide_latest.csv');
   const resultNational = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-national/RIVM_NL_national.json');
   const resultProvincial = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-provincial/RIVM_NL_provincial_latest.json');
@@ -53,7 +52,6 @@ export const getStaticProps: GetStaticProps = async _ => {
       provincial,
       dataIC,
     },
-    unstable_revalidate: 3600 * 2 // 3600 seconds = 1 hour * 2 = 2 hours
   };
 }
 
