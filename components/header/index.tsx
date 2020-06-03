@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import useDarkMode from 'use-dark-mode';
 import styled, { ThemeContext } from 'styled-components';
 import Select from 'react-select';
 
+import { DarkModeContext } from '../../pages/_app';
 import Toggle from '../toggle';
 import SunIcon from '../icons/SunIcon';
 import MoonIcon from '../icons/MoonIcon';
@@ -66,7 +66,7 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
   const { lastUpdated, selectedProvince, setSelectedProvince } = props;
-  const darkMode = useDarkMode(false);
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
   const { fontColor }: ThemeProps = useContext(ThemeContext);
 
   const options = [
@@ -118,13 +118,9 @@ const Header = (props: HeaderProps) => {
         <LastUpdated>Laatst geüpdate: {lastUpdated}</LastUpdated>
       </TextBlock>
       <DarkModeToggle>
-        <button name="toggleLightMode" type="button" onClick={darkMode.disable}>
-          <SunIcon fill={fontColor} />
-        </button>
-        <Toggle id="darkModeToggle" toggle={darkMode.toggle} value={darkMode.value} />
-        <button name="toggleDarkMode" type="button" onClick={darkMode.enable}>
-          <MoonIcon fill={fontColor} />
-        </button>
+        <SunIcon fill={fontColor} />
+        <Toggle id="darkModeToggle" toggle={toggleDarkMode} value={isDarkMode} />
+        <MoonIcon fill={fontColor} />
       </DarkModeToggle>
     </HeaderDiv>
   );

@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
-import useDarkMode from 'use-dark-mode';
+import React, { useEffect, useState, createContext } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { lightTheme, darkTheme, ThemeProps } from '../theme';
 
+export const DarkModeContext = createContext(null);
+
 const MyApp = ({ Component, pageProps }) => {
-  const darkMode = useDarkMode(true);
-  const theme: ThemeProps = darkMode.value ? darkTheme : lightTheme;
+  const [isDarkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = () => setDarkMode(!isDarkMode);
+  const theme: ThemeProps = isDarkMode ? darkTheme : lightTheme;
 
   useEffect(() => {
     // if ('serviceWorker' in navigator) {
@@ -15,9 +17,11 @@ const MyApp = ({ Component, pageProps }) => {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </DarkModeContext.Provider>
   );
 };
 

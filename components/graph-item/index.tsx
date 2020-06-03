@@ -1,19 +1,19 @@
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
-import useDarkMode from 'use-dark-mode';
 import { CartesianGrid, ResponsiveContainer, XAxis, YAxis, Line, LineChart, Tooltip } from 'recharts';
 
+import { DarkModeContext } from '../../pages/_app';
 import { darkTheme, lightTheme } from '../../theme';
 
 import Card from '../card';
-import { useState } from 'react';
 import Toggle from '../toggle';
 
 const Wrapper = styled.div`
-  width: 100%;
-  margin-top: 1.5rem;
+width: 100%;
+margin-top: 1.5rem;
 `;
 const Body = styled.div`
-  padding: 1.5rem;
+padding: 1.5rem;
 `;
 const HeaderDiv = styled.div`
   display: flex;
@@ -48,10 +48,10 @@ interface GraphItemProps {
 
 const GraphItem = (props: GraphItemProps) => {
   const { data, keyToggle, label, xKey, yKey } = props;
-  const { value } = useDarkMode(false);
+  const { isDarkMode } = useContext(DarkModeContext);
   const [isCumulative, setCumulative] = useState(false);
   const toggle = () => setCumulative(!isCumulative);
-  const dataColor = value ? darkTheme.fontColor : lightTheme.fontColor;
+  const dataColor = isDarkMode ? darkTheme.fontColor : lightTheme.fontColor;
 
   return (
     <Wrapper>

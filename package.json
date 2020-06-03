@@ -17,8 +17,7 @@
     "react-select": "^3.1.0",
     "recharts": "^1.8.5",
     "styled-components": "^5.1.0",
-    "sw-precache-webpack-plugin": "^0.11.3",
-    "use-dark-mode": "^2.3.1"
+    "sw-precache-webpack-plugin": "^0.11.3"
   },
   "devDependencies": {
     "@types/node": "^14.0.3",
