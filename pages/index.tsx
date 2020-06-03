@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
@@ -38,7 +38,7 @@ const DataList = styled.div`
   }
 `;
 
-export const getServerSideProps: GetServerSideProps = async _ => {
+export async function getStaticProps() {
   const resultIC = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-ic/data-nice/NICE_IC_wide_latest.csv');
   const resultNational = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-national/RIVM_NL_national.json');
   const resultProvincial = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-provincial/RIVM_NL_provincial_latest.json');
@@ -47,6 +47,7 @@ export const getServerSideProps: GetServerSideProps = async _ => {
   const dataIC = await resultIC.text();
 
   return {
+    revalidate: 3600,
     props: {
       national,
       provincial,
