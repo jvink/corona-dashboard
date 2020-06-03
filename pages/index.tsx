@@ -63,7 +63,7 @@ export default function Dashboard(props) {
   const lines = dataIC.trim().split('\n');
   const lastLine = lines[lines.length - 1].split(',');
   const latestICDate = lastLine[0];
-  const latestICCapacity = lastLine[1];
+  const latestICCapacity = lastLine[2];
   
   return (
     <Container>
