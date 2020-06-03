@@ -46,7 +46,7 @@ export async function getStaticProps() {
   const dataIC = await resultIC.text();
 
   return {
-    revalidate: 3600,
+    unstable_revalidate: 3600,
     props: {
       national,
       provincial,
