@@ -8,6 +8,10 @@ const FooterDiv = styled.footer`
   justify-content: center;
   align-items: center;
 `;
+const Copyright = styled.span`
+  color: ${props => props.theme.fontColor};
+  margin-right: .5rem;
+`;
 const Link = styled.a`
   color: ${props => props.theme.fontColor};
 `;
@@ -15,12 +19,13 @@ const Link = styled.a`
 const Footer = () => {
   return (
     <FooterDiv>
+      <Copyright>Copyright ©</Copyright>
       <Link
         href="https://www.linkedin.com/in/jurian-vink-282465141/"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Gemaakt door Jurian Vink
+        Jurian Vink
       </Link>
     </FooterDiv>
   );
