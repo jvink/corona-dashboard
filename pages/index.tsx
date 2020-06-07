@@ -37,6 +37,7 @@ const DataList = styled.div`
   }
 `;
 
+
 export async function getStaticProps() {
   const resultIC = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-ic/data-nice/NICE_IC_wide_latest.csv');
   const resultNational = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-national/RIVM_NL_national.json');
