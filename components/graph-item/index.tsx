@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { CartesianGrid, ResponsiveContainer, XAxis, YAxis, Line, LineChart, Tooltip } from 'recharts';
 
 import { DarkModeContext } from '../../pages/_app';
-import { darkTheme, lightTheme } from '../../theme';
+import { darkTheme, lightTheme, ThemeProps } from '../../theme';
 
 import Card from '../card';
 import Toggle from '../toggle';
@@ -70,10 +70,11 @@ interface GraphItemProps {
 
 const GraphItem = (props: GraphItemProps) => {
   const { data, keyToggle, label, xKey, yKey } = props;
+  const { totaalAantal, ziekenhuisopnameAantal, overledenAantal }: ThemeProps = useContext(ThemeContext);
   const dataKeys = [
-    { color: '#4E7DD4', key: 'totaalAantal', label: 'Totaal aantal' },
-    { color: '#009432', key: 'ziekenhuisopnameAantal', label: 'Ziekenhuisopname aantal' },
-    { color: '#EE5A24', key: 'overledenAantal', label: 'Overleden aantal' },
+    { color: totaalAantal, key: 'totaalAantal', label: 'Totaal aantal' },
+    { color: ziekenhuisopnameAantal, key: 'ziekenhuisopnameAantal', label: 'Ziekenhuisopname aantal' },
+    { color: overledenAantal, key: 'overledenAantal', label: 'Overleden aantal' },
   ];
   const [selectedDataKeys, setSelectedDataKeys] = useState(dataKeys);
   const { isDarkMode } = useContext(DarkModeContext);
@@ -97,7 +98,7 @@ const GraphItem = (props: GraphItemProps) => {
             <Label>{label}</Label>
             <OptionsDiv>
               {dataKeys.map((dataKey) => (
-                <OptionDiv>
+                <OptionDiv key={dataKey.key}>
                   <OptionCheckbox
                     type="checkbox" 
                     id={dataKey.key}

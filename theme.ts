@@ -3,6 +3,9 @@ export interface ThemeProps {
   fontColor: string;
   primaryColor: string;
   hintColor: string;
+  totaalAantal: string;
+  ziekenhuisopnameAantal: string;
+  overledenAantal: string;
 }
 
 const light: ThemeProps = {
@@ -10,6 +13,9 @@ const light: ThemeProps = {
   fontColor: '#000000',
   primaryColor: '#0652DD',
   hintColor: '#757575',
+  totaalAantal: '#3B5FA3',
+  ziekenhuisopnameAantal: '#006E25',
+  overledenAantal: '#943918',
 };
 
 const dark: ThemeProps = {
@@ -17,6 +23,9 @@ const dark: ThemeProps = {
   fontColor: '#FFFFFF',
   primaryColor: '#4E7DD4',
   hintColor: '#d9d9d9',
+  totaalAantal: '#4E7DD4',
+  ziekenhuisopnameAantal: '#009432',
+  overledenAantal: '#EE5A24',
 };
 
 export const darkTheme = { ...dark };
