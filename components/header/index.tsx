@@ -13,6 +13,10 @@ const HeaderDiv = styled.div`
   padding: 1.5rem 2rem 0 2rem;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 1100px) {
+    align-items: flex-start;
+  }
 `;
 const TextBlock = styled.div`
   display: flex;
@@ -20,6 +24,11 @@ const TextBlock = styled.div`
 `;
 const TitleBlock = styled.div`
   display: flex;
+  flex-direction: row;
+
+  @media (max-width: 1100px) {
+    flex-direction: column;
+  }
 `;
 const Title = styled.h1`
   color: ${props => props.theme.fontColor};
