@@ -9,8 +9,8 @@ import MoonIcon from '../icons/MoonIcon';
 import { ThemeProps } from '../../theme';
 
 const HeaderDiv = styled.div`
-display: flex;
-padding: 1.5rem 2rem;
+  display: flex;
+  padding: 1.5rem 2rem 0 2rem;
   justify-content: space-between;
   align-items: center;
 `;
@@ -18,21 +18,13 @@ const TextBlock = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const TitleBlock = styled.div`
+  display: flex;
+`;
 const Title = styled.h1`
   color: ${props => props.theme.fontColor};
   margin: 0;
-`;
-const ProvinceSelect = styled.select`
-  color: ${props => props.theme.primaryColor};
-  background-color: transparent;
-  border: none;
-  padding: 12px 0px;
-  outline: none;
-  font-size: 1.17em;
-  font-weight: bolder;
-  margin-top: 4px;
-  margin-bottom: 0;
-  margin-left: -4px;
+  margin-right: 1rem;
 `;
 const LastUpdated = styled.span`
   color: ${props => props.theme.hintColor};
@@ -92,7 +84,10 @@ const Header = (props: HeaderProps) => {
   return (
     <HeaderDiv>
       <TextBlock>
-        <Title>COVID-19</Title>
+        <TitleBlock>
+          <Title>COVID-19</Title>
+          <LastUpdated>Laatst geüpdate: {lastUpdated}</LastUpdated>
+        </TitleBlock>
         <Select
           value={{ value: selectedProvince, label: selectedProvince }}
           onChange={handleChange}
@@ -115,7 +110,6 @@ const Header = (props: HeaderProps) => {
             })
           }}
         />
-        <LastUpdated>Laatst geüpdate: {lastUpdated}</LastUpdated>
       </TextBlock>
       <DarkModeToggle>
         <SunIcon fill={fontColor} />

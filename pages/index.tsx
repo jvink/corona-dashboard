@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
@@ -5,8 +6,6 @@ import styled from 'styled-components';
 import Header from '../components/header';
 import DataItem from '../components/data-item';
 import Footer from '../components/footer';
-import Meter from '../components/meter';
-import { useState } from 'react';
 
 const GraphItem = dynamic(() => import('../components/graph-item'));
 
@@ -23,8 +22,7 @@ const Main = styled.main`
   flex: 1;
 
   @media (min-width: 600px) {
-    padding: 2rem;
-    padding-top: 1rem;
+    padding: 1rem 2rem 0 2rem;
   }
 `;
 const DataList = styled.div`
@@ -39,32 +37,25 @@ const DataList = styled.div`
 
 
 export async function getStaticProps() {
-  const resultIC = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-ic/data-nice/NICE_IC_wide_latest.csv');
   const resultNational = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-national/RIVM_NL_national.json');
   const resultProvincial = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-provincial/RIVM_NL_provincial_latest.json');
   const national = await resultNational.json();
   const provincial = await resultProvincial.json();
-  const dataIC = await resultIC.text();
 
   return {
-    unstable_revalidate: 3600,
+    revalidate: 30,
     props: {
       national,
       provincial,
-      dataIC,
     },
   };
 }
 
 export default function Dashboard(props) {
   const [selectedProvince, setSelectedProvince] = useState('Landelijk');
-  const { national, provincial, dataIC } = props;
+  const { national, provincial } = props;
   const selectedProviceObject = provincial.data.find(province => province.Provincienaam === selectedProvince);
   const latestData = selectedProvince !== 'Landelijk' ? selectedProviceObject : national.data[national.data.length - 1];
-  const lines = dataIC.trim().split('\n');
-  const lastLine = lines[lines.length - 1].split(',');
-  const latestICDate = lastLine[0];
-  const latestICCapacity = lastLine[2];
   
   return (
     <Container>
@@ -84,10 +75,7 @@ export default function Dashboard(props) {
 
 
         <DataList>
-          <Meter value={latestICCapacity} max={1150} lastUpdated={latestICDate} />
-          <GraphItem data={national.data} keyToggle="Tested" label="Positief geteste personen" xKey="Datum" yKey="totaalAantal" />
-          <GraphItem data={national.data} keyToggle="Admissions" label="Ziekenhuisopnames" xKey="Datum" yKey="ziekenhuisopnameAantal" />
-          <GraphItem data={national.data} keyToggle="Deceased" label="Overleden personen" xKey="Datum" yKey="overledenAantal" />
+          <GraphItem data={national.data} keyToggle="Tested" label="Data in grafiek" xKey="Datum" yKey="totaalAantal" />
         </DataList>
       </Main>
 
