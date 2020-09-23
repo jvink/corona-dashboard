@@ -1,4 +1,3 @@
-import { useState, useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 import { CartesianGrid, ResponsiveContainer, XAxis, YAxis, Line, LineChart, Tooltip } from 'recharts';
 
@@ -7,6 +6,7 @@ import { darkTheme, lightTheme, ThemeProps } from '../../theme';
 
 import Card from '../card';
 import Toggle from '../toggle';
+import { useContext, useState } from 'react';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -71,24 +71,13 @@ interface GraphItemProps {
 const GraphItem = (props: GraphItemProps) => {
   const { data, keyToggle, label, xKey, yKey } = props;
   const { totaalAantal, ziekenhuisopnameAantal, overledenAantal }: ThemeProps = useContext(ThemeContext);
-  const dataKeys = [
-    { color: totaalAantal, key: 'totaalAantal', label: 'Totaal aantal' },
-    { color: ziekenhuisopnameAantal, key: 'ziekenhuisopnameAantal', label: 'Ziekenhuisopname aantal' },
-    { color: overledenAantal, key: 'overledenAantal', label: 'Overleden aantal' },
-  ];
-  const [selectedDataKeys, setSelectedDataKeys] = useState(dataKeys);
   const { isDarkMode } = useContext(DarkModeContext);
   const [isCumulative, setCumulative] = useState(false);
   const toggle = () => setCumulative(!isCumulative);
   const dataColor = isDarkMode ? darkTheme.fontColor : lightTheme.fontColor;
-
-  function handleClickKey(dataKey) {
-    if (selectedDataKeys.find((s) => s.key === dataKey.key) ? true : false) {
-      setSelectedDataKeys(currentSelectedDataKeys => currentSelectedDataKeys.filter((o) => o.key !== dataKey.key));
-    } else {
-      setSelectedDataKeys(currentSelectedDataKeys => [...currentSelectedDataKeys, dataKey]);
-    }
-  }
+  const [enableTotal, setEnableTotal] = useState<boolean>(true);
+  const [enableHospitalAdmissions, setEnableHospitalAdmissions] = useState<boolean>(true);
+  const [enableDeceased, setEnableDeceased] = useState<boolean>(true);
 
   return (
     <Wrapper>
@@ -97,18 +86,36 @@ const GraphItem = (props: GraphItemProps) => {
           <HeaderDiv>
             <Label>{label}</Label>
             <OptionsDiv>
-              {dataKeys.map((dataKey) => (
-                <OptionDiv key={dataKey.key}>
-                  <OptionCheckbox
-                    type="checkbox" 
-                    id={dataKey.key}
-                    name={dataKey.label}
-                    checked={selectedDataKeys.find((s) => s.key === dataKey.key) ? true : false}
-                    onChange={() => handleClickKey(dataKey)}
-                  />
-                  <label htmlFor={dataKey.key} style={{ color: dataKey.color }}>{dataKey.label}</label>
-                </OptionDiv>
-              ))}
+              <OptionDiv>
+                <OptionCheckbox
+                  type="checkbox"
+                  id="total"
+                  name="Totaal aantal"
+                  checked={enableTotal}
+                  onChange={() => setEnableTotal(!enableTotal)}
+                />
+                <label htmlFor="total" style={{ color: totaalAantal }}>Totaal aantal</label>
+              </OptionDiv>
+              <OptionDiv>
+                <OptionCheckbox
+                  type="checkbox"
+                  id="hospitalAdmissions"
+                  name="Ziekenhuisopname aantal"
+                  checked={enableHospitalAdmissions}
+                  onChange={() => setEnableHospitalAdmissions(!enableHospitalAdmissions)}
+                />
+                <label htmlFor="hospitalAdmissions" style={{ color: ziekenhuisopnameAantal }}>Ziekenhuisopname aantal</label>
+              </OptionDiv>
+              <OptionDiv>
+                <OptionCheckbox
+                  type="checkbox"
+                  id="deceased"
+                  name="Overleden aantal"
+                  checked={enableDeceased}
+                  onChange={() => setEnableDeceased(!enableDeceased)}
+                />
+                <label htmlFor="deceased" style={{ color: overledenAantal }}>Overleden aantal</label>
+              </OptionDiv>
             </OptionsDiv>
             <SwitchDiv>
               <SwitchText>Cumulatief</SwitchText>
@@ -118,11 +125,14 @@ const GraphItem = (props: GraphItemProps) => {
           <div style={{ display: 'flex' }}>
             <ResponsiveContainer width="100%" height={400}>
               <LineChart data={data} margin={{ bottom: 40, top: 10 }}>
-                {selectedDataKeys.map((selectedDataKey) => (
-                  <Line type="basis" dataKey={`${selectedDataKey.key}${isCumulative ? 'Cumulatief' : ''}`} stroke={selectedDataKey.color} dot={false} key={selectedDataKey.key} />
-                ))}
+                {enableTotal && isCumulative && <Line type="basis" dataKey="totaalAantalCumulatief" stroke={totaalAantal} dot={false} />}
+                {enableHospitalAdmissions && isCumulative && <Line type="basis" dataKey="ziekenhuisopnameAantalCumulatief" stroke={ziekenhuisopnameAantal} dot={false} />}
+                {enableDeceased && isCumulative && <Line type="basis" dataKey="overledenAantalCumulatief" stroke={overledenAantal} dot={false} />}
+                {enableTotal && !isCumulative && <Line type="basis" dataKey="totaalAantal" stroke={totaalAantal} dot={false} />}
+                {enableHospitalAdmissions && !isCumulative && <Line type="basis" dataKey="ziekenhuisopnameAantal" stroke={ziekenhuisopnameAantal} dot={false} />}
+                {enableDeceased && !isCumulative && <Line type="basis" dataKey="overledenAantal" stroke={overledenAantal} dot={false} />}
                 <XAxis dataKey={xKey} angle={25} tickMargin={20} tick={{ fill: dataColor, stroke: dataColor, strokeWidth: 0.5 }} />
-                <YAxis dataKey={`${yKey}${isCumulative ? 'Cumulatief' : ''}`} tick={{ fill: dataColor, stroke: dataColor, strokeWidth: 0.5 }} />
+                <YAxis tick={{ fill: dataColor, stroke: dataColor, strokeWidth: 0.5 }} />
                 <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                 <Tooltip />
               </LineChart>
