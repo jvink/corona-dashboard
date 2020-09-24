@@ -1,3 +1,4 @@
+import { animated, config, OpaqueInterpolation, useSpring } from 'react-spring';
 import styled from 'styled-components';
 
 import Card from '../card';
@@ -38,15 +39,31 @@ interface DataItemProps {
 }
 
 const DataItem = (props: DataItemProps) => {
-  const { label, newCount, total} = props;
+  const { label, newCount, total } = props;
+  const { newCountAnimated, totalAnimated } = useSpring({
+    newCountAnimated: newCount,
+    totalAnimated: total,
+    from: {
+      newCountAnimated: 0,
+      totalAnimated: 0,
+    },
+    config: config.gentle,
+  });
+  const interpolate = (value: OpaqueInterpolation<number>) => value.interpolate(val => Math.floor(val))
 
   return (
     <Wrapper>
       <Card>
         <Body>
           <Label>{label}</Label>
-          <NewCount>+ {newCount}</NewCount>
-          <Total>Totaal: {total}</Total>
+          <NewCount>
+            {`+ `}
+            <animated.span>{interpolate(newCountAnimated)}</animated.span>
+          </NewCount>
+          <Total>
+            {`Totaal: `}
+            <animated.span>{interpolate(totalAnimated)}</animated.span>
+          </Total>
         </Body>
       </Card>
     </Wrapper>
