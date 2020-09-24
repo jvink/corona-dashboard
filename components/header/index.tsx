@@ -10,21 +10,24 @@ import { ThemeProps } from '../../theme';
 
 const HeaderDiv = styled.div`
   display: flex;
+  flex-direction: column;
   padding: 1.5rem 2rem 0 2rem;
   justify-content: space-between;
-  align-items: center;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 600px) {
     align-items: flex-start;
+    padding: 1rem 1rem 0 1rem;
   }
 `;
-const TextBlock = styled.div`
+const TopBlock = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 `;
 const TitleBlock = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
   @media (max-width: 1100px) {
     flex-direction: column;
@@ -78,39 +81,41 @@ const Header = (props: HeaderProps) => {
 
   return (
     <HeaderDiv>
-      <TextBlock>
+      <TopBlock>
         <TitleBlock>
           <Title>COVID-19</Title>
           <LastUpdated>Laatst geüpdate: {lastUpdated}</LastUpdated>
         </TitleBlock>
-        <Select
-          value={{ value: selectedProvince, label: selectedProvince }}
-          onChange={handleChange}
-          options={options}
-          styles={{
-            container: (provided) => ({
-              ...provided,
-              marginTop: '1rem',
-              marginBottom: '.5rem',
-            }),
-            control: (provided) => ({
-              ...provided,
-              backgroundColor: 'transparent',
-            }),
-            singleValue: (provided) => ({
-              ...provided,
-              color: '#4E7DD4',
-              fontSize: '1.17em',
-              fontWeight: 'bolder',
-            })
-          }}
-        />
-      </TextBlock>
-      <DarkModeToggle>
-        <SunIcon fill={fontColor} />
-        <Toggle id="darkModeToggle" toggle={toggleDarkMode} value={isDarkMode} />
-        <MoonIcon fill={fontColor} />
-      </DarkModeToggle>
+        <DarkModeToggle>
+          <SunIcon fill={fontColor} />
+          <Toggle id="darkModeToggle" toggle={toggleDarkMode} value={isDarkMode} />
+          <MoonIcon fill={fontColor} />
+        </DarkModeToggle>
+      </TopBlock>
+      <Select
+        value={{ value: selectedProvince, label: selectedProvince }}
+        onChange={handleChange}
+        options={options}
+        styles={{
+          container: (provided) => ({
+            ...provided,
+            marginTop: '1rem',
+            marginBottom: '.5rem',
+            width: '370px',
+            maxWidth: '100%',
+          }),
+          control: (provided) => ({
+            ...provided,
+            backgroundColor: 'transparent',
+          }),
+          singleValue: (provided) => ({
+            ...provided,
+            color: '#4E7DD4',
+            fontSize: '1.17em',
+            fontWeight: 'bolder',
+          })
+        }}
+      />
     </HeaderDiv>
   );
 };
