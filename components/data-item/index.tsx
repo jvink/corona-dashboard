@@ -49,7 +49,7 @@ const DataItem = (props: DataItemProps) => {
     },
     config: config.gentle,
   });
-  const interpolate = (value: OpaqueInterpolation<number>) => value.interpolate(val => Math.floor(val))
+  const interpolate = (value: OpaqueInterpolation<number>) => value.interpolate(val => Math.floor(val));
 
   return (
     <Wrapper>

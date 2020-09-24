@@ -1,2 +1,2 @@
 - animations
-- better switch layout
+- better checkbox layout

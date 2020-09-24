@@ -42,21 +42,7 @@ const LastUpdated = styled.span`
 `;
 const DarkModeToggle = styled.div`
   display: flex;
-  & > button {
-    font-size: 1.2em;
-    background: none;
-    border: none;
-    color: #F79F1F;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    &:last-child {
-      color: ${props => props.theme.hintColor};
-    }
-
-    &:focus {
-      outline: none;
-    }
-  }
+  align-items: center;
 `;
 
 interface HeaderProps {

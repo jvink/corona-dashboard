@@ -2,16 +2,16 @@ import styled from 'styled-components';
 
 const ToggleSpan = styled.span`
   position: relative;
-  padding: 0 4px;
   display: flex;
   align-items: center;
+  margin: 0 .25rem;
 `;
 const ToggleCheckBox = styled.input`
-  width: 40px;
-  height: 10px;
+  width: 64px;
+  height: 32px;
   background: #D9D9D9;
   position: relative;
-  border-radius: 5px;
+  border-radius: 24px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -20,7 +20,7 @@ const ToggleCheckBox = styled.input`
   outline: none;
 
   &:checked + label {
-    left: 30px;
+    left: 40px;
   }
 
   &:focus-visible {
@@ -29,13 +29,13 @@ const ToggleCheckBox = styled.input`
 
   & + label {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     transition: all 0.3s ease;
     cursor: pointer;
     position: absolute;
-    left: 2px;
+    left: 8px;
     user-select: none;
     background-color: #4E7DD4;
   }
