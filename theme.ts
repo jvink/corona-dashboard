@@ -13,9 +13,12 @@ const light: ThemeProps = {
   fontColor: '#000000',
   primaryColor: '#0652DD',
   hintColor: '#757575',
-  totaalAantal: '#3B5FA3',
-  ziekenhuisopnameAantal: '#006E25',
-  overledenAantal: '#943918',
+  // totaalAantal: '#3B5FA3',
+  // ziekenhuisopnameAantal: '#006E25',
+  // overledenAantal: '#943918',
+  totaalAantal: '#4E7DD4',
+  ziekenhuisopnameAantal: '#F79F1F',
+  overledenAantal: '#EA2027',
 };
 
 const dark: ThemeProps = {
@@ -24,8 +27,8 @@ const dark: ThemeProps = {
   primaryColor: '#4E7DD4',
   hintColor: '#d9d9d9',
   totaalAantal: '#4E7DD4',
-  ziekenhuisopnameAantal: '#009432',
-  overledenAantal: '#EE5A24',
+  ziekenhuisopnameAantal: '#F79F1F',
+  overledenAantal: '#EA2027',
 };
 
 export const darkTheme = { ...dark };

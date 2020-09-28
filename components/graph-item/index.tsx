@@ -7,6 +7,7 @@ import { darkTheme, lightTheme, ThemeProps } from '../../theme';
 import Card from '../card';
 import Toggle from '../toggle';
 import { useContext, useState } from 'react';
+import CheckBox from '../checkbox';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -34,18 +35,6 @@ const OptionsDiv = styled.div`
     align-items: flex-start;
   }
 `;
-const OptionDiv = styled.div`
-  margin-left: 2rem;
-  margin-bottom: 0;
-
-  @media (max-width: 1100px) {
-    margin-left: 0;
-    margin-bottom: 1rem;
-  }
-`;
-const OptionCheckbox = styled.input`
-  margin-right: .5rem;
-`;
 const SwitchDiv = styled.div`
   display: flex;
   align-items: center;
@@ -69,7 +58,7 @@ interface GraphItemProps {
 }
 
 const GraphItem = (props: GraphItemProps) => {
-  const { data, keyToggle, label, xKey, yKey } = props;
+  const { data, keyToggle, label, xKey } = props;
   const { totaalAantal, ziekenhuisopnameAantal, overledenAantal }: ThemeProps = useContext(ThemeContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const [isCumulative, setCumulative] = useState(false);
@@ -86,36 +75,27 @@ const GraphItem = (props: GraphItemProps) => {
           <HeaderDiv>
             <Label>{label}</Label>
             <OptionsDiv>
-              <OptionDiv>
-                <OptionCheckbox
-                  type="checkbox"
-                  id="total"
-                  name="Totaal aantal"
-                  checked={enableTotal}
-                  onChange={() => setEnableTotal(!enableTotal)}
-                />
-                <label htmlFor="total" style={{ color: totaalAantal }}>Totaal aantal</label>
-              </OptionDiv>
-              <OptionDiv>
-                <OptionCheckbox
-                  type="checkbox"
-                  id="hospitalAdmissions"
-                  name="Ziekenhuisopname aantal"
-                  checked={enableHospitalAdmissions}
-                  onChange={() => setEnableHospitalAdmissions(!enableHospitalAdmissions)}
-                />
-                <label htmlFor="hospitalAdmissions" style={{ color: ziekenhuisopnameAantal }}>Ziekenhuisopname aantal</label>
-              </OptionDiv>
-              <OptionDiv>
-                <OptionCheckbox
-                  type="checkbox"
-                  id="deceased"
-                  name="Overleden aantal"
-                  checked={enableDeceased}
-                  onChange={() => setEnableDeceased(!enableDeceased)}
-                />
-                <label htmlFor="deceased" style={{ color: overledenAantal }}>Overleden aantal</label>
-              </OptionDiv>
+              <CheckBox
+                id="total"
+                label="Totaal aantal"
+                checked={enableTotal}
+                color={totaalAantal}
+                onChange={() => setEnableTotal(!enableTotal)}
+              />
+              <CheckBox
+                id="hospitalAdmissions"
+                label="Ziekenhuisopname aantal"
+                checked={enableHospitalAdmissions}
+                color={ziekenhuisopnameAantal}
+                onChange={() => setEnableHospitalAdmissions(!enableHospitalAdmissions)}
+              />
+              <CheckBox
+                id="deceased"
+                label="Overleden aantal"
+                checked={enableDeceased}
+                color={overledenAantal}
+                onChange={() => setEnableDeceased(!enableDeceased)}
+              />
             </OptionsDiv>
             <SwitchDiv>
               <SwitchText>Cumulatief</SwitchText>
