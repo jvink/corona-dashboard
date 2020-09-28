@@ -1,5 +1,5 @@
 import styled, { ThemeContext } from 'styled-components';
-import { CartesianGrid, ResponsiveContainer, XAxis, YAxis, Line, LineChart, Tooltip } from 'recharts';
+import { CartesianGrid, ResponsiveContainer, XAxis, YAxis, Line, LineChart, Tooltip, Dot } from 'recharts';
 
 import { DarkModeContext } from '../../pages/_app';
 import { darkTheme, lightTheme, ThemeProps } from '../../theme';

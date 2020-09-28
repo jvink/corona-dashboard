@@ -1,2 +1,3 @@
 - animations
-- better checkbox layout
+- seo
+- things that happened
