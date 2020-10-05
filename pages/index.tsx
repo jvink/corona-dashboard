@@ -35,27 +35,30 @@ const DataList = styled.div`
   }
 `;
 
-
 export async function getStaticProps() {
   const resultNational = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-national/RIVM_NL_national.json');
-  const resultProvincial = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-provincial/RIVM_NL_provincial_latest.json');
+  const resultProvincial = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-provincial/RIVM_NL_provincial.json');
+  const resultProvincialLatest = await fetch('https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-json/data-provincial/RIVM_NL_provincial_latest.json');
   const national = await resultNational.json();
   const provincial = await resultProvincial.json();
+  const provincialLatest = await resultProvincialLatest.json();
 
   return {
-    revalidate: 30,
+    revalidate: 60 * 60,
     props: {
       national,
       provincial,
+      provincialLatest,
     },
   };
 }
 
 export default function Dashboard(props) {
   const [selectedProvince, setSelectedProvince] = useState('Landelijk');
-  const { national, provincial } = props;
-  const selectedProviceObject = provincial.data.find(province => province.Provincienaam === selectedProvince);
+  const { national, provincial, provincialLatest } = props;
+  const selectedProviceObject = provincialLatest.data.find(province => province.Provincienaam === selectedProvince);
   const latestData = selectedProvince !== 'Landelijk' ? selectedProviceObject : national.data[national.data.length - 1];
+  const graphData = selectedProvince !== 'Landelijk' ? provincial.data.filter((province) => province.Provincienaam === selectedProvince) : national.data;
   
   return (
     <Container>
@@ -75,7 +78,7 @@ export default function Dashboard(props) {
 
 
         <DataList>
-          <GraphItem data={national.data} keyToggle="Tested" label="Data in grafiek" xKey="Datum" yKey="totaalAantal" />
+          <GraphItem data={graphData} keyToggle="Tested" label="Data in grafiek" xKey="Datum" yKey="totaalAantal" />
         </DataList>
       </Main>
 
