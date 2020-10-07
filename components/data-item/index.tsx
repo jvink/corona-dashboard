@@ -24,12 +24,15 @@ const Body = styled.div`
 `;
 const Label = styled.h3`
   color: ${props => props.theme.fontColor};
+  transition: color 0.3s ease-in-out;
 `;
 const NewCount = styled.h1`
   color: ${props => props.theme.primaryColor};
+  transition: color 0.3s ease-in-out;
 `;
 const Total = styled.label`
   color: ${props => props.theme.hintColor};
+  transition: color 0.3s ease-in-out;
 `;
 
 interface DataItemProps {

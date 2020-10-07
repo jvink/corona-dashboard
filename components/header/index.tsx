@@ -37,11 +37,13 @@ const Title = styled.h1`
   color: ${props => props.theme.fontColor};
   margin: 0;
   margin-right: 1rem;
+  transition: color 0.3s ease-in-out;
 `;
 const LastUpdated = styled.span`
   color: ${props => props.theme.hintColor};
   margin-top: 12px;
   font-size: 14px;
+  transition: color 0.3s ease-in-out;
 `;
 const DarkModeToggle = styled.div`
   display: flex;

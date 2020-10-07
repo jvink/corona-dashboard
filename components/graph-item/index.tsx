@@ -44,9 +44,11 @@ const SwitchText = styled.span`
   margin-bottom: 1rem;
   color: ${props => props.theme.fontColor};
   margin-right: 1rem;
+  transition: color 0.3s ease-in-out;
 `;
 const Label = styled.h3`
   color: ${props => props.theme.fontColor};
+  transition: color 0.3s ease-in-out;
 `;
 
 interface GraphItemProps {

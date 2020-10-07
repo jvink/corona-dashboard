@@ -16,6 +16,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: background-color 0.3s ease-in-out;
 `;
 const Main = styled.main`
   padding: 1rem;
